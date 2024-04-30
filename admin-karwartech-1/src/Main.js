@@ -51,6 +51,16 @@ const AddMobileForm = () => {
       setError('Failed to clear mobile data');
     }
   };
+
+  const deleteMobile = async (id) => {
+    try {
+      await axios.delete(`/mobiles/${id}`);
+      // After successful deletion, fetch updated mobile data
+      fetchMobiles();
+    } catch (error) {
+      setError('Failed to delete mobile');
+    }
+  };
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Mobile Gallery</h1>
@@ -99,6 +109,7 @@ const AddMobileForm = () => {
                   />
                 ))}
               </div>
+              <button onClick={() => deleteMobile(mobile._id)}>Delete</button>
             </li>
           ))}
         </ul>
