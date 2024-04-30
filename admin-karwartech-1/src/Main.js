@@ -54,7 +54,7 @@ const AddMobileForm = () => {
 
   const deleteMobile = async (id) => {
     try {
-      await axios.delete(`/mobiles/${id}`);
+      await axios.delete(`https://karwartech-backend.onrender.com/mobiles/${id}`);
       // After successful deletion, fetch updated mobile data
       fetchMobiles();
     } catch (error) {
