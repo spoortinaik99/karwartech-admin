@@ -5,6 +5,7 @@ const AddMobileForm = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [files, setFiles] = useState([]);
+  const [sliderFiles ,setSliderFiles] = useState([]);
   const [mobiles, setMobiles] = useState([]);
   const [error, setError] = useState('');
 
@@ -42,7 +43,24 @@ const AddMobileForm = () => {
     }
   };
 
+  const handleUploadSlider = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    for (let i = 0; i < sliderFiles.length; i++) {
+      formData.append('sliderImages', sliderFiles[i]);
+    }
 
+    try {
+      await axios.post('https://karwartech-backend.onrender.com/upload-slider', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setSliderFiles([]);
+    } catch (error) {
+      setError('Failed to upload slider images');
+    }
+  };
   const handleClearData = async () => {
     try {
       await axios.delete('https://karwartech-backend.onrender.com/clear-data');
@@ -64,7 +82,7 @@ const AddMobileForm = () => {
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Mobile Gallery</h1>
-      <form onSubmit={handleUpload} style={styles.form} encType="multipart/form-data">
+      {/* <form onSubmit={handleUpload} style={styles.form} encType="multipart/form-data">
         <input
           style={styles.input}
           type="text"
@@ -79,14 +97,27 @@ const AddMobileForm = () => {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
+
         <input
           style={styles.input}
           type="file"
           multiple
           onChange={(e) => setFiles(e.target.files)}
         />
+        
         <button style={styles.button} type="submit">Upload</button>
+
+    
        
+      </form> */}
+      <form onSubmit={handleUploadSlider} style={styles.form} encType="multipart/form-data">
+      <input
+          style={styles.input}
+          type="file"
+          multiple
+          onChange={(e) => setSliderFiles(e.target.files)}
+        />
+            <button style={styles.button} type="submit">Upload Slider Images</button>
       </form>
       <button style={styles.button} onClick={handleClearData}>Clear All</button>
 
