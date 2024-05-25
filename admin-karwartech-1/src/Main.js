@@ -94,7 +94,7 @@ const AddMobileForm = () => {
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Mobile Gallery</h1>
-      {/* <form onSubmit={handleUpload} style={styles.form} encType="multipart/form-data">
+      <form onSubmit={handleUpload} style={styles.form} encType="multipart/form-data">
         <input
           style={styles.input}
           type="text"
@@ -121,7 +121,7 @@ const AddMobileForm = () => {
 
     
        
-      </form> */}
+      </form>
       <form onSubmit={handleUploadSlider} style={styles.form} encType="multipart/form-data">
       <input
           style={styles.input}
@@ -157,6 +157,31 @@ const AddMobileForm = () => {
           ))}
         </ul>
       </div>
+
+
+      <div>
+        <h2 style={styles.subHeading}>Uploaded Mobiles</h2>
+        <ul style={styles.mobileList}>
+          {sliderImages.map((mobile) => (
+            <li key={mobile._id} style={styles.mobileItem}>
+              <p style={styles.mobileDetail}>Name: {mobile.name}</p>
+              <p style={styles.mobileDetail}>Price: {mobile.price}</p>
+              <div style={styles.imageContainer}>
+                {mobile.filePaths.map((filePath, index) => (
+                  <img
+                    key={index}
+                    src={`https://karwartech-backend.onrender.com/${filePath}`}
+                    alt={`${mobile.name} - Image ${index + 1}`}
+                    style={styles.image}
+                  />
+                ))}
+              </div>
+             
+            </li>
+          ))}
+        </ul>
+      </div>
+
     </div>
   );
 };
