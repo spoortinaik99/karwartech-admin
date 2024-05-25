@@ -12,7 +12,7 @@ const LoginPage = () => {
   const handleLogin = () => {
     // Check login credentials (hardcoded for simplicity)
     if (loginId === 'anshulnaik@karwartech.com' && password === 'Anshul@123') {
-      navigate('/upload'); // Redirect to the upload page
+      navigate('/select'); // Redirect to the upload page
     } else {
       setError('Incorrect login ID or password');
     }

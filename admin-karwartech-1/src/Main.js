@@ -55,24 +55,7 @@ const AddMobileForm = () => {
     }
   };
 
-  const handleUploadSlider = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    for (let i = 0; i < sliderFiles.length; i++) {
-      formData.append('sliderImages', sliderFiles[i]);
-    }
 
-    try {
-      await axios.post('https://karwartech-backend.onrender.com/upload-slider', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      setSliderFiles([]);
-    } catch (error) {
-      setError('Failed to upload slider images');
-    }
-  };
   const handleClearData = async () => {
     try {
       await axios.delete('https://karwartech-backend.onrender.com/clear-data');
@@ -122,15 +105,7 @@ const AddMobileForm = () => {
     
        
       </form>
-      <form onSubmit={handleUploadSlider} style={styles.form} encType="multipart/form-data">
-      <input
-          style={styles.input}
-          type="file"
-          multiple
-          onChange={(e) => setSliderFiles(e.target.files)}
-        />
-            <button style={styles.button} type="submit">Upload Slider Images</button>
-      </form>
+    
       <button style={styles.button} onClick={handleClearData}>Clear All</button>
 
       {error && <p style={styles.error}>{error}</p>}
