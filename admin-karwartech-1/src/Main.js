@@ -8,10 +8,22 @@ const AddMobileForm = () => {
   const [sliderFiles ,setSliderFiles] = useState([]);
   const [mobiles, setMobiles] = useState([]);
   const [error, setError] = useState('');
+  const [sliderImages, setSliderImages] = useState([]);
 
   useEffect(() => {
     fetchMobiles();
+    fetchSliderImages();
   }, []);
+
+
+  const fetchSliderImages = async () => {
+    try {
+      const response = await axios.get('https://karwartech-backend.onrender.com/slider-images');
+      setSliderImages(response.data);
+    } catch (error) {
+      setError('Failed to fetch slider images');
+    }
+  };
 
   const fetchMobiles = async () => {
     try {
