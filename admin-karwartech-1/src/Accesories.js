@@ -87,7 +87,6 @@ const Accesories = () => {
     const deleteMobile = async (id) => {
       try {
         await axios.delete(`https://karwartech-backend.onrender.com/acc/${id}`);
-        // After successful deletion, fetch updated mobile data
         fetchMobiles();
       } catch (error) {
         setError('Failed to delete mobile');
